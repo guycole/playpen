@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * NativeDemo driver
+ * 
+ * @author gsc
+ */
 public class MainActivity extends Activity {
 
   /*
@@ -47,3 +52,8 @@ public class MainActivity extends Activity {
   //
   private final String LOG_TAG = getClass().getSimpleName();
 }
+
+/*
+ * Copyright 2012 Digital Burro, INC
+ * Created on Jan 16, 2012 by gsc
+ */

@@ -3,7 +3,9 @@ package com.digiburo.example.native_demo;
 import android.util.Log;
 
 /**
- * @author guycole
+ * NDK wrapper
+ * 
+ * @author gsc
  */
 public class NdkWrapper {
 
@@ -90,3 +92,8 @@ public class NdkWrapper {
   //
   private final String LOG_TAG = getClass().getSimpleName();
 }
+
+/*
+ * Copyright 2012 Digital Burro, INC
+ * Created on Jan 16, 2012 by gsc
+ */
