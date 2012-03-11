@@ -23,7 +23,7 @@ static jfieldID bufferId;
 static jintArray nativeBuffer;
 
 /*
- *
+ * error reporting
  */
 void envDump(JNIEnv *env) {
   if (env->ExceptionCheck()) {
@@ -88,7 +88,6 @@ JNIEXPORT void JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_nativeV
   }
 
   env->ReleaseIntArrayElements(nativeBuffer, body, 0);
-
   env->CallVoidMethod(thiz, callBackMethodId);
   env->DeleteLocalRef(nativeBuffer);
 }
@@ -124,6 +123,21 @@ JNIEXPORT jstring JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_nati
 JNIEXPORT jint JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_nativeAdder(JNIEnv *env, jobject thiz, jint arg1, jdouble arg2) {
   int result = (int) arg1 + arg2;
   return(result);
+}
+
+/*
+ * Class:     com_digiburo_example_native_demo_NdkWrapper
+ * Method:    exceptionDemo
+ * Signature: ()V
+ *
+ * demonstrate exception propagation
+ */
+JNIEXPORT void JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_exceptionDemo(JNIEnv *env, jobject thiz) {
+  LOGI("throw exception");
+  //throw("demonstration exception");
+  jthrowable throwable = env->ExceptionOccurred();
+  jclass iae = env->FindClass("java/lang/IllegalArgumentException");
+  env->ThrowNew(iae, "throw from C");
 }
 
 /*

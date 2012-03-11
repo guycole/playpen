@@ -2,6 +2,7 @@ package com.digiburo.example.native_demo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends Activity {
 
@@ -12,11 +13,23 @@ public class MainActivity extends Activity {
   @Override
   protected void onResume() {
     super.onResume();
+    Log.i(LOG_TAG, "onResume");
+
+    // demonstrate reading a C string
+    Log.i(LOG_TAG, _ndkWrapper.nativeString());
     
-    LogFacade.entry(LOG_TAG, "onResume");
-    LogFacade.info(LOG_TAG, "nativeAdder:" + _ndkWrapper.nativeAdder(234, 4.56));
-    LogFacade.info(LOG_TAG, "nativeString:" + _ndkWrapper.nativeString());
+    // demonstrate method w/arguments and return value
+    int result = _ndkWrapper.nativeAdder(11, 22);
+    Log.i(LOG_TAG, "native adder result:" + result);
     
+    // demonstrate exception handling
+    try {
+      _ndkWrapper.exceptionDemo();
+    } catch(IllegalArgumentException iae) {
+      Log.i(LOG_TAG, "exception noted");
+    }
+  
+    // demonstrate update of a shared variable and callback
     _ndkWrapper.vectorDemo();
   }
   
@@ -24,13 +37,7 @@ public class MainActivity extends Activity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    if (Constants.DEBUG_APPLICATION_MODE) {
-      LogFacade.info(LOG_TAG, "----start w/debug mode true----");
-    } else {
-      LogFacade.info(LOG_TAG, "----start w/debug mode false----");
-    }
-    
+    Log.i(LOG_TAG, "onCreate");
     setContentView(R.layout.main);
   }
   

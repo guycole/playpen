@@ -39,6 +39,14 @@ JNIEXPORT jstring JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_nati
 JNIEXPORT jint JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_nativeAdder
   (JNIEnv *, jobject, jint, jdouble);
 
+/*
+ * Class:     com_digiburo_example_native_demo_NdkWrapper
+ * Method:    exceptionDemo
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_digiburo_example_native_1demo_NdkWrapper_exceptionDemo
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
